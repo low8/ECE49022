@@ -88,18 +88,18 @@ def web_page():
     </style>
     </head>
     <body>
-    <h1>ESP32 WEB Server</h1>
+    <h1>Team 34 Cornhole Dashboard</h1>
     <p>
-    <i class="fas fa-thermometer-half" style="color:#059e8a;"></i> 
-    <span class="sensor-labels">Temperature</span> 
+    <i class="fas fa-bolt" style="color:#E4001B;"></i> 
+    <span class="sensor-labels">Red Score</span> 
     <span>"""+str(temp)+"""</span>
-    <sup class="units">&deg;F</sup>
+    <sup class="units">Points</sup>
     </p>
     <p>
-    <i class="fas fa-bolt" style="color:#00add6;"></i>
-    <span class="sensor-labels">Hall</span>
+    <i class="fas fa-bolt" style="color:#0099FF;"></i>
+    <span class="sensor-labels">Blue Score</span>
     <span>"""+str(hall)+"""</span>
-    <sup class="units">V</sup>
+    <sup class="units">Points</sup>
     </p>
     <p>
     RED LED Current State: <strong>""" + red_led_state + """</strong>
@@ -108,7 +108,7 @@ def web_page():
     <a href="/?red_led=on"><button class="button">RED ON</button></a>
     </p>
     <p>
-    <a href="/?red_led=off"><button class="button button2">RED OFF</button></a>
+    <a href="/?red_led=off"><button class="button">RED OFF</button></a>
     </p>
     </body>
     </html>"""
