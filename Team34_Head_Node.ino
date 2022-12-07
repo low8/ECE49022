@@ -119,10 +119,10 @@ void sendAndRecieve_setup() {
 }
 
 void sendAndRecieve_loop() {
-  getReadings();
+  // getReadings();
 
-  Cur.red = red_score;
-  Cur.blue = blue_score;
+  Cur.red = numbers[0] * 10 + numbers[1];;
+  Cur.blue = numbers[2] * 10 + numbers[3];
   Cur.seq = seq;
 
   esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &Cur, sizeof(Cur));
@@ -134,15 +134,15 @@ void sendAndRecieve_loop() {
     Serial.println("Error sending the data");
   }
   updateDisplay();
-  delay(10000);
+  delay(100);
 
 }
 
-void getReadings(){
-  red_score -= 26;
-  blue_score -= 26;
-  seq += 1;
-}
+// void getReadings(){
+//   red_score -= 26;
+//   blue_score -= 26;
+//   seq += 1;
+// }
 
 void updateDisplay(){
 
@@ -337,6 +337,7 @@ void scoring_loop() {
       {
         number[i] = roundScore[i];
       }
+      seq += 1;
     }
   }
   else //if win condition is met
@@ -384,11 +385,12 @@ void scoring_setup() {
  
 void setup() {
   Serial.begin(115200);
+  scoring_setup();
   sendAndRecieve_setup();
 }
  
 void loop() {
+  scoring_loop();
   sendAndRecieve_loop();
   Serial.println("EXIT LOOP");
 }
-
