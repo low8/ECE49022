@@ -11,7 +11,7 @@
 
 // Communication Variables
 
-uint8_t broadcastAddress[] = {0xC4, 0xDD, 0x57, 0xC9, 0x8C, 0xB4};
+uint8_t broadcastAddress[] = {0xC4, 0xDD, 0x57, 0xC9, 0x8A, 0xF8};
 
 float red_score;
 float blue_score;
@@ -86,8 +86,8 @@ void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
 
 void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
   memcpy(&incomingReadings, incomingData, sizeof(incomingReadings));
-  //Serial.print("Bytes received: ");
-  //Serial.println(len);
+  // Serial.print("Bytes received: ");
+  // Serial.println(len);
   incomingRed = incomingReadings.red;
   incomingBlue = incomingReadings.blue;
   incomingSeq = incomingReadings.seq;
@@ -150,17 +150,17 @@ void updateDisplay(){
     red_score = incomingRed;
     blue_score = incomingBlue;
   }
-
-  // Serial.println("INCOMING READINGS");
-  // Serial.print("red_score: ");
-  // Serial.print(incomingRed);
-  // Serial.println();
-  // Serial.print("blue_score: ");
-  // Serial.print(incomingBlue);
-  // Serial.println();
-  // Serial.print("seq: ");
-  // Serial.print(incomingSeq);
-  // Serial.println();
+  delay(1000);
+  Serial.println("INCOMING READINGS");
+  Serial.print("red_score: ");
+  Serial.print(incomingRed);
+  Serial.println();
+  Serial.print("blue_score: ");
+  Serial.print(incomingBlue);
+  Serial.println();
+  Serial.print("seq: ");
+  Serial.print(incomingSeq);
+  Serial.println();
 }
 
 //separates the digits of the score for the displays
@@ -385,11 +385,11 @@ void scoring_setup() {
  
 void setup() {
   Serial.begin(115200);
-  scoring_setup();
+  // scoring_setup();
   sendAndRecieve_setup();
 }
  
 void loop() {
-  scoring_loop();
+  // scoring_loop();
   sendAndRecieve_loop();
 }
