@@ -80,14 +80,14 @@ byte redWin[10] {B0001010, B10011110, B01111010, B00000000};
 byte blueWin[10] {B00111110, B00011100, B00111000, B10011110};
 
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
-  Serial.print("\r\nLast Packet Send Status:\t");
-  Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
+  //Serial.print("\r\nLast Packet Send Status:\t");
+  //Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
 }
 
 void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
   memcpy(&incomingReadings, incomingData, sizeof(incomingReadings));
-  Serial.print("Bytes received: ");
-  Serial.println(len);
+  //Serial.print("Bytes received: ");
+  //Serial.println(len);
   incomingRed = incomingReadings.red;
   incomingBlue = incomingReadings.blue;
   incomingSeq = incomingReadings.seq;
@@ -96,11 +96,11 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
 void sendAndRecieve_setup() {
   WiFi.mode(WIFI_STA);
 
-  Serial.print("ESP Board MAC Address:  ");
-  Serial.println(WiFi.macAddress());
+  //Serial.print("ESP Board MAC Address:  ");
+  //Serial.println(WiFi.macAddress());
 
   if (esp_now_init() != ESP_OK) {
-    Serial.println("Error initializing ESP-NOW");
+    //Serial.println("Error initializing ESP-NOW");
     return;
   }
 
@@ -111,7 +111,7 @@ void sendAndRecieve_setup() {
   peerInfo.encrypt = false;
        
   if (esp_now_add_peer(&peerInfo) != ESP_OK){
-    Serial.println("Failed to add peer");
+    //Serial.println("Failed to add peer");
     return;
   }
 
@@ -128,13 +128,13 @@ void sendAndRecieve_loop() {
   esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &Cur, sizeof(Cur));
    
   if (result == ESP_OK) {
-    Serial.println("Sent with success");
+    //Serial.println("Sent with success");
   }
   else {
-    Serial.println("Error sending the data");
+    //Serial.println("Error sending the data");
   }
   updateDisplay();
-  delay(100);
+  delay(1);
 
 }
 
@@ -151,16 +151,16 @@ void updateDisplay(){
     blue_score = incomingBlue;
   }
 
-  Serial.println("INCOMING READINGS");
-  Serial.print("red_score: ");
-  Serial.print(incomingRed);
-  Serial.println();
-  Serial.print("blue_score: ");
-  Serial.print(incomingBlue);
-  Serial.println();
-  Serial.print("seq: ");
-  Serial.print(incomingSeq);
-  Serial.println();
+  // Serial.println("INCOMING READINGS");
+  // Serial.print("red_score: ");
+  // Serial.print(incomingRed);
+  // Serial.println();
+  // Serial.print("blue_score: ");
+  // Serial.print(incomingBlue);
+  // Serial.println();
+  // Serial.print("seq: ");
+  // Serial.print(incomingSeq);
+  // Serial.println();
 }
 
 //separates the digits of the score for the displays
@@ -239,7 +239,7 @@ void readRFID(void ) { /* function readRFID */
   }
 
   printDec(rfid.uid.uidByte, rfid.uid.size); //detect which team the tag belongs to
-  Serial.println();
+  //Serial.println();
 
   // Halt PICC
   rfid.PICC_HaltA();
@@ -392,5 +392,4 @@ void setup() {
 void loop() {
   scoring_loop();
   sendAndRecieve_loop();
-  Serial.println("EXIT LOOP");
 }
