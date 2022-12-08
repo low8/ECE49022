@@ -5,4 +5,4 @@ This repositroy will hold the code for the web interface, the storing and scorin
 
 All the code within this repository is all the code that has been used on this project.
 
-The final code for the scoring microcontrolle is in the file "scoring6" and the final code for the sensing microcontroller is in "sensorMicro."
+The final code for the scoring microcontroller is in the file "scoring6" and the final code for the sensing microcontroller is in "sensorMicro."
