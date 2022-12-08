@@ -10,6 +10,7 @@ const int ledPin1 = 17;
 const int trigPin2 = 25;
 const int echoPin2 = 35;
 const int ledPin2 = 19;
+int inRange = 0;
 
 //define sound speed in cm/uS
 #define SOUND_SPEED 0.034
@@ -52,9 +53,15 @@ void loop() {
   newDistance = myLIDAR.getDistance();
 
   distance = (newDistance/100) * 3.28084;
-
+  if (inRange == 0)
+  {
+    if (distance < 31 and distance > 30)
+    {
+      inRange = 1;
+    }
+  }
   // Light up LED indicator
-  if (distance < 27.5 and distance > 27) {
+  if (inRange == 1) {
     digitalWrite(ledPin, HIGH); 
 
     digitalWrite(trigPin1, LOW);// Clears the trigPin
